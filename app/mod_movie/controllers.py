@@ -1,10 +1,11 @@
 # Import flask dependencies
 from flask import Blueprint, request, render_template, \
-    flash, g, session, redirect, url_for
+    flash, g, session, redirect, url_for, jsonify
 
 
 # Import the database object from the main app module
 
+from app.mod_movie.models import Movie
 
 # Import module forms
 
@@ -17,5 +18,12 @@ mod_movie = Blueprint('movies', __name__, url_prefix='/movies')
 
 @mod_movie.route('/', methods=['GET'])
 def actor_index():
+    movies = Movie.query.all()
+    data = []
 
-    return "movies"
+    for movie in movies:
+        data.append(movie.format())
+    return jsonify({
+        "success": True,
+        "actors": data
+    })

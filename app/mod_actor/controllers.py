@@ -1,8 +1,9 @@
 # Import flask dependencies
 from flask import Blueprint, request, render_template, \
-    flash, g, session, redirect, url_for
+    flash, g, session, redirect, url_for, jsonify
 
-from .models import Actor
+from app.mod_actor.models import Actor
+from app.mod_movie.models import Movie
 # Import module forms
 
 
@@ -14,5 +15,12 @@ mod_actor = Blueprint('actors', __name__, url_prefix='/actors')
 
 @mod_actor.route('/', methods=['GET'])
 def actor_index():
+    actors = Actor.query.all()
+    data = []
 
-    return "actor"
+    for actor in actors:
+        data.append(actor.format())
+    return jsonify({
+        "success": True,
+        "actors": data
+    })
