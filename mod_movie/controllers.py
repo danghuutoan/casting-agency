@@ -10,12 +10,12 @@ from flask import Blueprint, request, render_template, \
 
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_actor = Blueprint('actors', __name__, url_prefix='/actors')
+mod_movie = Blueprint('movies', __name__, url_prefix='/movies')
 
 # Set the route and accepted methods
 
 
-@mod_actor.route('/', methods=['GET'])
+@mod_movie.route('/', methods=['GET'])
 def actor_index():
 
-    return "actor"
+    return "movies"

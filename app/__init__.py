@@ -1,3 +1,5 @@
+from mod_actor.controllers import mod_actor as actor_module
+from mod_movie.controllers import mod_movie as movie_module
 import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -16,6 +18,9 @@ app = create_app()
 
 # Configurations
 app.config.from_object('config')
+
+app.register_blueprint(actor_module)
+app.register_blueprint(movie_module)
 
 # by modules and controllers
 db = SQLAlchemy(app)

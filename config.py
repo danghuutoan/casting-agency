@@ -10,6 +10,5 @@ DEBUG = True
 
 
 # TODO IMPLEMENT DATABASE URL
-# SQLALCHEMY_DATABASE_URI = 'postgres://postgres@localhost:5432/casting_agency'
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
