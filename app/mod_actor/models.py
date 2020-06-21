@@ -26,7 +26,7 @@ class Actor(db.Model):
     def format(self):
         movies = []
         for movie in self.movies:
-            movies.append(movie.format())
+            movies.append(movie.format_short())
         return {
             "id": self.id,
             "name": self.name,
@@ -38,7 +38,5 @@ class Actor(db.Model):
     def format_short(self):
         return {
             "id": self.id,
-            "name": self.name,
-            "age": self.age,
-            "gender": self.gender_id
+            "name": self.name
         }

@@ -26,3 +26,10 @@ class Movie(db.Model):
             "title": self.title,
             "actors": actors
         }
+
+    def format_short(self):
+        
+        return {
+            "id": self.id,
+            "title": self.title
+        }
