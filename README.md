@@ -59,3 +59,8 @@ Deploy server to heroku
 heroku run python manage.py db init --app casting-service
 
 ```
+# Remote Heroku psql 
+
+```
+heroku pg:psql --app casting-service
+```
