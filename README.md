@@ -44,4 +44,4 @@ flask run
 
 Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
 
-Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application.
+Setting the `FLASK_APP` variable to `app.py` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application.
