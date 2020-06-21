@@ -44,3 +44,9 @@ python3 run.py
 Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
 
 Setting the `FLASK_APP` variable to `app.py` directs flask to use the `flaskr` directory and the `__init__.py` file to find the application.
+
+Deploy server using gunicorn
+
+```
+    gunicorn -b :8080 run:app
+```
