@@ -50,3 +50,5 @@ Deploy server using gunicorn
 ```
     gunicorn -b :8080 run:app
 ```
+
+Deploy server to heroku
