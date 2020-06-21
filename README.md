@@ -37,9 +37,8 @@ From within the project root directory first ensure you are working using your c
 To run the server, execute:
 
 ```bash
-export FLASK_APP=app.py
 export FLASK_ENV=development
-flask run
+python3 run.py
 ```
 
 Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.
