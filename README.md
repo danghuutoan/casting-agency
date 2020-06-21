@@ -64,3 +64,9 @@ heroku run python manage.py db init --app casting-service
 ```
 heroku pg:psql --app casting-service
 ```
+
+# Push data from local database to remote database 
+
+```
+heroku pg:push casting_agency DATABASE_URL --app casting-service
+```
