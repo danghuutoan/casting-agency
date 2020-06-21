@@ -13,6 +13,8 @@ def create_app(test_config=None):
 
 
 app = create_app()
+# by modules and controllers
+db = SQLAlchemy(app)
 
 
 @app.route('/')
