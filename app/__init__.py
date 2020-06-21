@@ -13,6 +13,10 @@ def create_app(test_config=None):
 
 
 app = create_app()
+
+# Configurations
+app.config.from_object('config')
+
 # by modules and controllers
 db = SQLAlchemy(app)
 

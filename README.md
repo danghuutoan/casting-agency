@@ -52,3 +52,10 @@ Deploy server using gunicorn
 ```
 
 Deploy server to heroku
+
+# DB migration
+
+```
+heroku run python manage.py db init --app casting-service
+
+```
