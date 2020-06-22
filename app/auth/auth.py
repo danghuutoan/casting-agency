@@ -3,11 +3,14 @@ from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+import os
 
+# from dotenv import load_dotenv
+# load_dotenv()
 
-AUTH0_DOMAIN = 'dev-to9u3yj6.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'casting_service'
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = [os.environ['AUTH_ALGORITHMS']]
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
 # AuthError Exception
 '''
