@@ -319,3 +319,29 @@ heroku pg:push casting_agency DATABASE_URL --app casting-service
     "success": true
     }
     ```
+
+### POST /movies
+
+-   General:   
+    -   create a new movie with the given attribute in json body
+    - curl command :
+    ```bash
+    curl http://127.0.0.1:8080/movies -X POST -H "Content-Type: application/json" -d '{
+    "title": "movie 4",
+    "release_date": "2020-02-02 12:03:03"
+    }'
+    ```
+-   Sample response:
+    ```json
+    {
+    "movies": [
+        {
+        "actors": [], 
+        "id": 5, 
+        "release_date": "Sun, 02 Feb 2020 05:03:03 GMT", 
+        "title": "movie 4"
+        }
+    ], 
+    "success": true
+    }
+    ```
