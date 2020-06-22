@@ -4,6 +4,8 @@ from flask import Blueprint, request, render_template, \
 
 from app.mod_actor.models import Actor
 from app.mod_movie.models import Movie
+
+from app.auth.auth import requires_auth
 # Import module forms
 
 
@@ -14,7 +16,8 @@ mod_actor = Blueprint('actors', __name__, url_prefix='/actors')
 
 
 @mod_actor.route('/', methods=['GET'])
-def get_actors():
+@requires_auth('read:actors')
+def get_actors(payload):
     try:
         actors = Actor.query.all()
     except Exception:
@@ -31,7 +34,8 @@ def get_actors():
 
 
 @mod_actor.route('/<int:id>', methods=['GET'])
-def get_actor_by_id(id):
+@requires_auth('read:actors')
+def get_actor_by_id(payload, id):
     try:
         actor = Actor.query.get(id)
     except Exception:
@@ -46,7 +50,8 @@ def get_actor_by_id(id):
 
 
 @mod_actor.route('', methods=['POST'])
-def create_actor():
+@requires_auth('create:actors')
+def create_actor(payload):
     request_json = request.get_json()
     actor = Actor(request_json["name"], request_json["age"], request_json["gender"])
     if "movies" in request_json:
@@ -63,7 +68,8 @@ def create_actor():
     })
 
 @mod_actor.route('/<int:id>', methods=["DELETE"])
-def delete_actor(id):
+@requires_auth('delete:actors')
+def delete_actor(payload, id):
     actor = Actor.query.get(id)
     if actor == None:
         abort(404)
@@ -76,7 +82,8 @@ def delete_actor(id):
         })
 
 @mod_actor.route('/<int:id>', methods=["PATCH"])
-def update_actor(id):
+@requires_auth('update:actors')
+def update_actor(payload, id):
     actor = Actor.query.get(id)
     request_json = request.get_json()
 

@@ -5,6 +5,7 @@ import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from app.auth.auth import AuthError
 
 def setup_db(app, database_path=os.environ.get("DATABASE_URL")):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
@@ -49,6 +50,14 @@ def create_app(test_config=None):
             "error": 400,
             "message": "bad request"
         }), 400
+
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "message": error.error['description']
+        }), error.status_code
     return app
 
 

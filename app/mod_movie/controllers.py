@@ -8,7 +8,7 @@ from flask import Blueprint, request, render_template, \
 from app.mod_movie.models import Movie
 from app.mod_actor.models import Actor
 # Import module forms
-
+from app.auth.auth import requires_auth
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_movie = Blueprint('movies', __name__, url_prefix='/movies')
@@ -17,7 +17,8 @@ mod_movie = Blueprint('movies', __name__, url_prefix='/movies')
 
 
 @mod_movie.route('/', methods=['GET'])
-def get_all_movies():
+@requires_auth('read:movies')
+def get_all_movies(payload):
     try:
         movies = Movie.query.all()
     except Exception:
@@ -33,7 +34,8 @@ def get_all_movies():
 
 
 @mod_movie.route('/<int:id>', methods=['GET'])
-def get_movie_by_id(id):
+@requires_auth('read:movies')
+def get_movie_by_id(payload,id):
     try:
         movie = Movie.query.get(id)
     except Exception:
@@ -48,7 +50,8 @@ def get_movie_by_id(id):
     })
 
 @mod_movie.route('', methods=['POST'])
-def create_movie():
+@requires_auth('create:movies')
+def create_movie(payload):
     request_json = request.get_json()
     movie = Movie(request_json["title"], request_json["release_date"])
     if "actors" in request_json:
@@ -65,7 +68,8 @@ def create_movie():
     })
 
 @mod_movie.route('/<int:id>', methods=["DELETE"])
-def delete_movie(id):
+@requires_auth('delete:movies')
+def delete_movie(payload, id):
     movie = Movie.query.get(id)
     if movie == None:
         abort(404)
@@ -78,7 +82,8 @@ def delete_movie(id):
         })
 
 @mod_movie.route('/<int:id>', methods=["PATCH"])
-def update_movie(id):
+@requires_auth('update:movies')
+def update_movie(payload, id):
     movie = Movie.query.get(id)
     request_json = request.get_json()
 
