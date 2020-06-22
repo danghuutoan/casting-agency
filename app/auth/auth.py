@@ -5,8 +5,8 @@ from jose import jwt
 from urllib.request import urlopen
 import os
 
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
 ALGORITHMS = [os.environ['AUTH_ALGORITHMS']]
