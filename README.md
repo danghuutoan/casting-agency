@@ -71,7 +71,19 @@ heroku pg:psql --app casting-service
 heroku pg:push casting_agency DATABASE_URL --app casting-service
 ```
 
-# Endpoints
+## Testing
+
+To run the tests, run
+
+```
+dropdb casting_agency
+createdb casting_agency
+psql casting_agency < casting_agency.psql
+python test_movie.py
+python test_actor.py
+```
+
+## Endpoints
 
 ### GET /actors
 
@@ -342,6 +354,22 @@ heroku pg:push casting_agency DATABASE_URL --app casting-service
         "title": "movie 4"
         }
     ], 
+    "success": true
+    }
+    ```
+
+### DELETE /actors/<int:id>
+
+-   General:   
+    -   delete an actor with the given attribute in json body
+    - curl command :
+    ```bash
+    curl http://127.0.0.1:8080/actors/9 -X DELETE
+    ```
+-   Sample response:
+    ```json
+    {
+    "delete":9,
     "success": true
     }
     ```

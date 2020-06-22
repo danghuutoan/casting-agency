@@ -90,6 +90,18 @@ class ActorTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 400)
         self.assertEqual(data["success"], False)
+    
+    def test_delete_an_valid_actor(self):
+        res = self.client().delete('/actors/10')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+
+    def test_delete_an_invalid_actor(self):
+        res = self.client().delete('/actors/100')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()

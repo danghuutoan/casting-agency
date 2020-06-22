@@ -61,3 +61,17 @@ def create_actor():
         "success": True,
         "actors": [actor.format()]
     })
+
+@mod_actor.route('/<int:id>', methods=["DELETE"])
+def delete_actor(id):
+    actor = Actor.query.get(id)
+    print(actor)
+    if actor == None:
+        abort(404)
+    else:
+        actor.delete()
+
+        return jsonify({
+            "success": True,
+            "delete": actor.id
+        })
