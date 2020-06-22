@@ -28,6 +28,9 @@ class Movie(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
     def format(self):
         actors = []
 
