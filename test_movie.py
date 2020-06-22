@@ -8,7 +8,7 @@ from app import create_app
 
 
 
-class TriviaTestCase(unittest.TestCase):
+class MovieTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
 
     def setUp(self):
