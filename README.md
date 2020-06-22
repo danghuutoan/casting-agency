@@ -373,3 +373,19 @@ python test_actor.py
     "success": true
     }
     ```
+
+### DELETE /movies/<int:id>
+
+-   General:   
+    -   delete a movie with the given attribute in json body
+    - curl command :
+    ```bash
+    curl http://127.0.0.1:8080/movies/9 -X DELETE
+    ```
+-   Sample response:
+    ```json
+    {
+    "delete":9,
+    "success": true
+    }
+    ```

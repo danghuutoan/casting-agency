@@ -63,3 +63,16 @@ def create_movie():
         "success": True,
         "movies": [movie.format()]
     })
+
+@mod_movie.route('/<int:id>', methods=["DELETE"])
+def delete_movie(id):
+    movie = Movie.query.get(id)
+    if movie == None:
+        abort(404)
+    else:
+        movie.delete()
+
+        return jsonify({
+            "success": True,
+            "delete": movie.id
+        })
