@@ -14,7 +14,7 @@ mod_actor = Blueprint('actors', __name__, url_prefix='/actors')
 
 
 @mod_actor.route('/', methods=['GET'])
-def actor_index():
+def get_actors():
     try:
         actors = Actor.query.all()
     except Exception:
@@ -27,4 +27,19 @@ def actor_index():
     return jsonify({
         "success": True,
         "actors": data
+    })
+
+
+@mod_actor.route('/<int:id>', methods=['GET'])
+def get_actor_by_id(id):
+    try:
+        actor = Actor.query.get(id)
+    except Exception:
+        abort(422)
+    if actor == None:
+        abort(404)
+    
+    return jsonify({
+        "success": True,
+        "actors": actor.format()
     })

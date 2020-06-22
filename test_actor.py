@@ -43,6 +43,19 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data["success"], True)
         self.assertTrue(data["actors"])
 
+    def test_get_actor_by_a_valid_id(self):
+        res = self.client().get('/actors/1')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertTrue(data["actors"])
+
+    def test_404_returned_if_get_actor_by_an_invalid_id(self):
+        res = self.client().get('/actors/100')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
