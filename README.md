@@ -236,7 +236,7 @@ heroku pg:push casting_agency DATABASE_URL --app casting-service
     - Get an movie by the given id
     - curl command 
     ```bash
-    url http://127.0.0.1:8080/movie/1
+    curl http://127.0.0.1:8080/movies/1
     ```
 - Sample response:
     ```json
@@ -250,6 +250,37 @@ heroku pg:push casting_agency DATABASE_URL --app casting-service
         ], 
         "id": 1, 
         "title": "The Movie 1"
+    }, 
+    "success": true
+    }
+    ```
+
+### GET /actors/<int:id>
+
+-   General:
+    - Get an actor by the given id
+    - curl command 
+    ```bash
+    curl http://127.0.0.1:8080/actors/1
+    ```
+- Sample response:
+    ```json
+    {
+    "actors": {
+        "age": 5, 
+        "gender": 1, 
+        "id": 1, 
+        "movies": [
+        {
+            "id": 1, 
+            "title": "The Movie 1"
+        }, 
+        {
+            "id": 3, 
+            "title": "The Movie 3"
+        }
+        ], 
+        "name": "The Actor 1"
     }, 
     "success": true
     }
