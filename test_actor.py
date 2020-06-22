@@ -44,7 +44,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data["actors"])
 
     def test_get_actor_by_a_valid_id(self):
-        res = self.client().get('/actors/1')
+        res = self.client().get('/actors/2')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
@@ -56,6 +56,40 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
 
+    def test_create_new_actor(self):
+        new_actor = {
+                    "name": "new actor",
+                    "age": 5,
+                    "gender":1
+                    }
+        res = self.client().post('/actors', json=new_actor)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+
+    def test_create_new_actor_with_an_available_movie(self):
+        new_actor = {
+                    "name": "new actor",
+                    "age": 5,
+                    "gender":1,
+                    "movies":[1]
+                    }
+        res = self.client().post('/actors', json=new_actor)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+    
+    def test_create_new_actor_with_an_unavailable_movie(self):
+        new_actor = {
+                    "name": "new actor",
+                    "age": 5,
+                    "gender":1,
+                    "movies":[100]
+                    }
+        res = self.client().post('/actors', json=new_actor)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(data["success"], False)
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()

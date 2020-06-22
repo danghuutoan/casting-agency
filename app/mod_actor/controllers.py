@@ -43,3 +43,21 @@ def get_actor_by_id(id):
         "success": True,
         "actors": actor.format()
     })
+
+
+@mod_actor.route('', methods=['POST'])
+def create_actor():
+    request_json = request.get_json()
+    actor = Actor(request_json["name"], request_json["age"], request_json["gender"])
+    if "movies" in request_json:
+        for movie_id in request_json['movies']:
+            movie = Movie.query.get(movie_id)
+            if movie == None:
+                abort(400)
+            actor.movies.append(movie) 
+    
+    actor.insert()
+    return jsonify({
+        "success": True,
+        "actors": [actor.format()]
+    })

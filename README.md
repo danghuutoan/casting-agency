@@ -285,3 +285,37 @@ heroku pg:push casting_agency DATABASE_URL --app casting-service
     "success": true
     }
     ```
+
+### POST /actors
+
+-   General:   
+    -   create a new actor with the given attribute in json body
+    - curl command :
+    ```bash
+    curl http://127.0.0.1:8080/actors -X POST -H "Content-Type: application/json" -d '{
+    "name": "Actor 2",
+    "gender": 2,
+    "age": 25,
+    "movies": [1]
+    }'
+    ```
+-   Sample response:
+    ```json
+    {
+    "actors": [
+        {
+        "age": 25, 
+        "gender": 2, 
+        "id": 12, 
+        "movies": [
+            {
+            "id": 1, 
+            "title": "a title"
+            }
+        ], 
+        "name": "Actor 2"
+        }
+    ], 
+    "success": true
+    }
+    ```

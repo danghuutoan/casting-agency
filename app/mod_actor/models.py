@@ -11,7 +11,7 @@ class Actor(db.Model):
 
     __tablename__ = 'actor'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     age = db.Column(db.Integer)
     gender_id = db.Column(db.Integer, db.ForeignKey('gender.id'))
@@ -19,6 +19,14 @@ class Actor(db.Model):
 
     movies = db.relationship("Movie",
                     secondary= movie_actor_table, back_populates="actors")
+    def __init__(self, name, age, gender):
+        self.name = name
+        self.gender_id = gender
+        self.age = age 
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
     
     def update(self):
         db.session.commit()

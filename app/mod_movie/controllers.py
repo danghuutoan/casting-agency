@@ -6,7 +6,7 @@ from flask import Blueprint, request, render_template, \
 # Import the database object from the main app module
 
 from app.mod_movie.models import Movie
-
+from app.mod_actor.models import Actor
 # Import module forms
 
 
@@ -45,4 +45,21 @@ def get_movie_by_id(id):
     return jsonify({
         "success": True,
         "movies": movie.format()
+    })
+
+@mod_movie.route('', methods=['POST'])
+def create_movie():
+    request_json = request.get_json()
+    movie = Movie(request_json["title"], request_json["release_date"])
+    if "actors" in request_json:
+        for actor_id in request_json['actors']:
+            actor = Actor.query.get(actor_id)
+            if actor == None:
+                abort(404)
+            movie.actors.append(actor) 
+    
+    movie.insert()
+    return jsonify({
+        "success": True,
+        "movies": [movie.format()]
     })
