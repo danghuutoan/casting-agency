@@ -25,5 +25,5 @@ def actor_index():
         data.append(movie.format())
     return jsonify({
         "success": True,
-        "actors": data
+        "movies": data
     })
