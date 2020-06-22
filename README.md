@@ -83,6 +83,24 @@ python test_movie.py
 python test_actor.py
 ```
 
+## Error handling
+
+Errors are returned as JSON objects in the following format
+
+```
+{
+    "success": False,
+    "error": 404,
+    "message": "Not found"
+}
+```
+
+The API will return three types of error when requests fail
+
+-   404 : Not found
+-   422 : Unprocessable
+-   400 : Bad request
+
 ## Endpoints
 
 ### GET /actors

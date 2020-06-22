@@ -122,6 +122,7 @@ class ActorTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
