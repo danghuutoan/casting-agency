@@ -84,12 +84,21 @@ def update_actor(id):
         abort(404)
     else:
         for key in request_json:
-            if hasattr(actor, key) is False:
-                abort(400)
-            setattr(actor, key, request_json[key])
+            if key != "movies":
+                if hasattr(actor, key) is False:
+                    abort(400)
+                setattr(actor, key, request_json[key])
+            else:
+            
+                for movie_id in request_json["movies"]:
+                    movie = Movie.query.get(movie_id)
+                    if movie == None:
+                        abort(400)
+                    else:
+                        actor.movies.append(movie)
 
         actor.update()
-        
+
         return jsonify({
             "success": True,
             "update": actor.format()

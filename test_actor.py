@@ -104,7 +104,7 @@ class ActorTestCase(unittest.TestCase):
         self.assertEqual(data["success"], False)
 
     def test_udpate_an_valid_actor_name(self):
-        res = self.client().patch('/actors/2', json={"name" : "test"})
+        res = self.client().patch('/actors/2', json={"name" : "test", "movies":[1,2,3,4]})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
@@ -118,7 +118,7 @@ class ActorTestCase(unittest.TestCase):
 
     
     def test_udpate_an_invalid_actor_name(self):
-        res = self.client().patch('/actors/200', json={"name" : "test"})
+        res = self.client().patch('/actors/200', json={"name" : "test", "movies":[1,2,3,4]})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
