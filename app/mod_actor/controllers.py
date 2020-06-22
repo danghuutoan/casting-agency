@@ -65,7 +65,6 @@ def create_actor():
 @mod_actor.route('/<int:id>', methods=["DELETE"])
 def delete_actor(id):
     actor = Actor.query.get(id)
-    print(actor)
     if actor == None:
         abort(404)
     else:
@@ -74,4 +73,24 @@ def delete_actor(id):
         return jsonify({
             "success": True,
             "delete": actor.id
+        })
+
+@mod_actor.route('/<int:id>', methods=["PATCH"])
+def update_actor(id):
+    actor = Actor.query.get(id)
+    request_json = request.get_json()
+
+    if actor == None:
+        abort(404)
+    else:
+        for key in request_json:
+            if hasattr(actor, key) is False:
+                abort(400)
+            setattr(actor, key, request_json[key])
+
+        actor.update()
+        
+        return jsonify({
+            "success": True,
+            "update": actor.format()
         })

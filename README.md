@@ -389,3 +389,19 @@ python test_actor.py
     "success": true
     }
     ```
+
+### PATCH /actors/<int:id>
+
+-   General:   
+    -   update an actor with the given attribute in json body
+    - curl command :
+    ```bash
+    curl http://127.0.0.1:8080/actors/9 -X patch -d '{"name":"toan"}'
+    ```
+-   Sample response:
+    ```json
+    {
+    "update":9,
+    "success": true
+    }
+    ```

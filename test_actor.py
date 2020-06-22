@@ -103,6 +103,25 @@ class ActorTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
 
+    def test_udpate_an_valid_actor_name(self):
+        res = self.client().patch('/actors/2', json={"name" : "test"})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(data["update"]["name"], "test")
+
+    def test_udpate_an_invalid_actor_attribute(self):
+        res = self.client().patch('/actors/2', json={"nafddfme" : "test"})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(data["success"], False)
+
+    
+    def test_udpate_an_invalid_actor_name(self):
+        res = self.client().patch('/actors/200', json={"name" : "test"})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
