@@ -71,6 +71,7 @@ heroku pg:psql --app casting-service
 heroku pg:push casting_agency DATABASE_URL --app casting-service
 ```
 ## Auth0 Authorize Link
+the app is not shipped with front end so please use the link below for login
 https://dev-to9u3yj6.auth0.com/authorize?audience=casting_service&response_type=token&client_id=gLQbqpEH5ribwnbZJiGRwW4C4RW4puvS&redirect_uri=http://localhost:8100/tabs/user-page&prompt=login
 ## Testing
 
