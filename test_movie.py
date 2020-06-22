@@ -101,6 +101,26 @@ class MovieTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
 
+    def test_udpate_an_valid_movie_title(self):
+        res = self.client().patch('/movies/2', json={"title" : "test", "actors":[5,2,3,4]})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(data["update"]["title"], "test")
+
+    def test_udpate_an_invalid_movie_attribute(self):
+        res = self.client().patch('/movies/2', json={"nafddfme" : "test"})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(data["success"], False)
+
+    
+    def test_udpate_an_invalid_movie_title(self):
+        res = self.client().patch('/movies/200', json={"title" : "test", "movies":[1,2,3,4]})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()

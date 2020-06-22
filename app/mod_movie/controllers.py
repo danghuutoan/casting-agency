@@ -76,3 +76,32 @@ def delete_movie(id):
             "success": True,
             "delete": movie.id
         })
+
+@mod_movie.route('/<int:id>', methods=["PATCH"])
+def update_movie(id):
+    movie = Movie.query.get(id)
+    request_json = request.get_json()
+
+    if movie == None:
+        abort(404)
+    else:
+        for key in request_json:
+            if key != "actors":
+                if hasattr(movie, key) is False:
+                    abort(400)
+                setattr(movie, key, request_json[key])
+            else:
+            
+                for actor_id in request_json["actors"]:
+                    actor = Actor.query.get(actor_id)
+                    if actor == None:
+                        abort(400)
+                    else:
+                        movie.actors.append(actor)
+
+        movie.update()
+
+        return jsonify({
+            "success": True,
+            "update": movie.format()
+        })
