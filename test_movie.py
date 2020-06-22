@@ -55,6 +55,39 @@ class TriviaTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
+    
+    def test_create_new_movie(self):
+        new_movie = {
+            "title": "movie 4",
+            "release_date": "2020-02-02 12:03:03"
+        }
+        res = self.client().post('/movies', json=new_movie)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+
+    def test_create_new_movie_with_an_available_actor(self):
+        
+        new_movie = {
+            "title": "movie 4",
+            "release_date": "2020-02-02 12:03:03",
+            "actors": [2]
+        }
+        res = self.client().post('/movies', json=new_movie)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+    
+    def test_create_new_movie_with_an_unavailable_actor(self):
+        new_movie = {
+            "title": "movie 4",
+            "release_date": "2020-02-02 12:03:03",
+            "actors": [100]
+        }
+        res = self.client().post('/movies', json=new_movie)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(data["success"], False)
 
 # Make the tests conveniently executable
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ def create_movie():
         for actor_id in request_json['actors']:
             actor = Actor.query.get(actor_id)
             if actor == None:
-                abort(404)
+                abort(400)
             movie.actors.append(actor) 
     
     movie.insert()
