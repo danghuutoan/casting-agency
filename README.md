@@ -401,13 +401,26 @@ python test_actor.py
 -   Sample response:
     ```json
     {
-        "success": true,
-        "update": {
-            "age": 2,
-            "gender": 1,
-            "id": 2,
-            "movies": [],
-            "name": "toan"
+    "success": true,
+    "update": {
+        "age": 2,
+        "gender": 1,
+        "id": 2,
+        "movies": [
+        {
+            "id": 1,
+            "title": "a title"
+        },
+        {
+            "id": 3,
+            "title": "movie 3"
+        },
+        {
+            "id": 4,
+            "title": "movie 4"
         }
+        ],
+        "name": "toan"
+    }
     }
     ```
