@@ -7,7 +7,7 @@ from app.mod_movie.models import Movie
 
 from app.auth.auth import requires_auth
 # Import module forms
-
+import sys
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_actor = Blueprint('actors', __name__, url_prefix='/actors')
@@ -21,8 +21,9 @@ def get_actors(payload):
     try:
         actors = Actor.query.all()
     except Exception:
+        print(sys.exc_info())
         abort(422)
-    
+        
     data = []
 
     for actor in actors:

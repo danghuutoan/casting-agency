@@ -72,5 +72,5 @@ register_endpoint(app)
 
 @app.route('/')
 def index():
-    return "helloworld1"
+    return "Casting Agency"
 

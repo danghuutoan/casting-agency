@@ -1,5 +1,5 @@
 # Casting Agency API Backend
-
+Casting Agency helps simplify the casting process
 ## Getting Started
 
 ### Installing Dependencies
@@ -103,7 +103,7 @@ The API will return three types of error when requests fail
 -   400 : Bad request
 
 ## Endpoints
-
+url : https://casting-service.herokuapp.com/
 ### GET /actors
 
 -   General:
