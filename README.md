@@ -70,3 +70,187 @@ heroku pg:psql --app casting-service
 ```
 heroku pg:push casting_agency DATABASE_URL --app casting-service
 ```
+
+# Endpoints
+
+### GET /actors
+
+-   General:
+    -   get all the available actors
+    -   Curl command
+        ```bash
+        curl http://127.0.0.1:8080/actors/
+        ```
+    -   Return: An object similar to the on below
+        ```json
+        {
+        "actors": [
+            {
+            "age": 5, 
+            "gender": 1, 
+            "id": 1, 
+            "movies": [
+                {
+                "id": 1, 
+                "title": "The Movie 1"
+                }, 
+                {
+                "id": 3, 
+                "title": "The Movie 3"
+                }
+            ], 
+            "name": "The Actor 1"
+            }, 
+            {
+            "age": 10, 
+            "gender": 2, 
+            "id": 2, 
+            "movies": [
+                {
+                "id": 3, 
+                "title": "The Movie 3"
+                }, 
+                {
+                "id": 4, 
+                "title": "The Movie 4"
+                }
+            ], 
+            "name": "The Actor 2"
+            }, 
+            {
+            "age": 20, 
+            "gender": 2, 
+            "id": 3, 
+            "movies": [
+                {
+                "id": 2, 
+                "title": "The Movie 2"
+                }, 
+                {
+                "id": 4, 
+                "title": "The Movie 4"
+                }
+            ], 
+            "name": "The Actor 3"
+            }, 
+            {
+            "age": 35, 
+            "gender": 2, 
+            "id": 4, 
+            "movies": [], 
+            "name": "The Actor 4"
+            }, 
+            {
+            "age": 40, 
+            "gender": 1, 
+            "id": 5, 
+            "movies": [], 
+            "name": "The Actor 5"
+            }, 
+            {
+            "age": 50, 
+            "gender": 2, 
+            "id": 6, 
+            "movies": [], 
+            "name": "The Actor 6"
+            }, 
+            {
+            "age": 6, 
+            "gender": 1, 
+            "id": 7, 
+            "movies": [], 
+            "name": "The Actor 7"
+            }
+        ], 
+        "success": true
+        }        
+        ```
+
+### GET /movies
+
+-   General:
+    -   get all the available movies
+    -   Curl command
+        ```bash
+        curl http://127.0.0.1:8080/movies/
+        ```
+    -   Return: An object similar to the on below
+        ```json
+        {
+        "movies": [
+            {
+            "actors": [
+                {
+                "id": 1, 
+                "name": "The Actor 1"
+                }
+            ], 
+            "id": 1, 
+            "title": "The Movie 1"
+            }, 
+            {
+            "actors": [
+                {
+                "id": 3, 
+                "name": "The Actor 3"
+                }
+            ], 
+            "id": 2, 
+            "title": "The Movie 2"
+            }, 
+            {
+            "actors": [
+                {
+                "id": 1, 
+                "name": "The Actor 1"
+                }, 
+                {
+                "id": 2, 
+                "name": "The Actor 2"
+                }
+            ], 
+            "id": 3, 
+            "title": "The Movie 3"
+            }, 
+            {
+            "actors": [
+                {
+                "id": 2, 
+                "name": "The Actor 2"
+                }, 
+                {
+                "id": 3, 
+                "name": "The Actor 3"
+                }
+            ], 
+            "id": 4, 
+            "title": "The Movie 4"
+            }
+        ], 
+        "success": true
+        }
+        ```
+### GET /movies/<int:id>
+
+-   General:
+    - Get an movie by the given id
+    - curl command 
+    ```bash
+    url http://127.0.0.1:8080/movie/1
+    ```
+- Sample response:
+    ```json
+    {
+    "movies": {
+        "actors": [
+        {
+            "id": 1, 
+            "name": "The Actor 1"
+        }
+        ], 
+        "id": 1, 
+        "title": "The Movie 1"
+    }, 
+    "success": true
+    }
+    ```

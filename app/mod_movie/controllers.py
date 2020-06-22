@@ -18,7 +18,10 @@ mod_movie = Blueprint('movies', __name__, url_prefix='/movies')
 
 @mod_movie.route('/', methods=['GET'])
 def get_all_movies():
-    movies = Movie.query.all()
+    try:
+        movies = Movie.query.all()
+    except Exception:
+        abort(422)
     data = []
 
     for movie in movies:
@@ -31,7 +34,11 @@ def get_all_movies():
 
 @mod_movie.route('/<int:id>', methods=['GET'])
 def get_movie_by_id(id):
-    movie = Movie.query.get(id)
+    try:
+        movie = Movie.query.get(id)
+    except Exception:
+        abort(422)
+    
     if movie == None:
         abort(404)
 
